@@ -26,17 +26,17 @@ class pdfXBlock(XBlock):
         default="http://tutorial.math.lamar.edu/pdf/Trig_Cheat_Sheet.pdf",
         scope=Scope.content,
         help="The URL for your PDF.")
-    
+
     allow_download = Boolean(display_name="PDF Download Allowed",
         default=True,
         scope=Scope.content,
         help="Display a download button for this PDF.")
-    
+
     source_text = String(display_name="Source document button text",
         default="",
         scope=Scope.content,
         help="Add a download link for the source file of your PDF. Use it for example to provide the PowerPoint file used to create this PDF.")
-    
+
     source_url = String(display_name="Source document URL",
         default="",
         scope=Scope.content,
@@ -67,7 +67,7 @@ class pdfXBlock(XBlock):
         The primary view of the XBlock, shown to students
         when viewing courses.
         """
-        
+
         context = {
             'display_name': self.display_name,
             'url': self.url,
@@ -76,7 +76,7 @@ class pdfXBlock(XBlock):
             'source_url': self.source_url
         }
         html = self.render_template('static/html/pdf_view.html', context)
-        
+
         frag = Fragment(html)
         frag.add_css(self.load_resource("static/css/pdf.css"))
         frag.add_javascript(self.load_resource("static/js/pdf_view.js"))
@@ -96,7 +96,7 @@ class pdfXBlock(XBlock):
             'source_url': self.source_url
         }
         html = self.render_template('static/html/pdf_edit.html', context)
-        
+
         frag = Fragment(html)
         frag.add_javascript(self.load_resource("static/js/pdf_edit.js"))
         frag.initialize_js('pdfXBlockInitEdit')
@@ -112,7 +112,34 @@ class pdfXBlock(XBlock):
         self.allow_download = True if data['allow_download'] == "True" else False # Str to Bool translation
         self.source_text = data['source_text']
         self.source_url = data['source_url']
-        
+
         return {
             'result': 'success',
         }
+
+    @XBlock.json_handler
+    def get_select_data(self, submissions, suffix=''):
+        """
+        Get select data from store
+        :param submissions:
+        :param suffix:
+        :return:
+        """
+        return [
+            {
+                'label': 'label1',
+                'url': 'url-1'
+            },
+            {
+                'label': 'label2',
+                'url': 'url-2'
+            },
+            {
+                'label': 'label3',
+                'url': 'url-3'
+            },
+            {
+                'label': 'label4',
+                'url': 'url-4'
+            }
+        ]
