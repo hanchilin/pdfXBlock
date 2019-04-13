@@ -42,7 +42,6 @@ function pdfXBlockInitEdit(runtime, element) {
     $.ajax({
         type: "GET",
         url: 'http://localhost:8088/wx/selects',
-        data: JSON.stringify({requested: true}),
         success: set_select_data
     });
     
