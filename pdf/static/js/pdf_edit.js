@@ -32,13 +32,6 @@ function pdfXBlockInitEdit(runtime, element) {
         });
     });
 
-    /*$.ajax({
-        type: "POST",
-        url: dataUrl,
-        data: JSON.stringify({requested: true}),
-        success: set_select_data
-    });*/
-
     $.ajax({
         type: "GET",
         url: 'http://localhost:8088/wx/selects',
@@ -46,18 +39,21 @@ function pdfXBlockInitEdit(runtime, element) {
     });
     
     function set_select_data(result) {
-        console.log('get select data from backend');
-        console.log(result);
         selectList = result;
         var selectOpts = '';
         if(selectList.length >0 ){
             for (let i = 0; i < selectList.length; i++) {
-                var obj = selectList[i]
-                var opt = '<option value =' + obj.url + '>' + obj.label + '</option>'
-                selectOpts += opt
+                var obj = selectList[i];
+                var opt = '<option value ="' + obj.url + '">' + obj.label + '</option>';
+                selectOpts += opt;
             }
         }
-        console.log('add options,',selectOpts);
         url_selector.html(selectOpts)
     }
+
+    url_selector.bind('onchange', function() {
+        var val = url_selector.children('option:selected').val();
+        console.log('select val:', val);
+        $('#select_val').val(val);
+    });
 }
