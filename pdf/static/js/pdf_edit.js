@@ -51,9 +51,9 @@ function pdfXBlockInitEdit(runtime, element) {
         url_selector.html(selectOpts)
     }
 
-    url_selector.bind('change', function() {
+    url_selector.change(function() {
         var val = url_selector.children('option:selected').val();
         console.log('select val:', val);
-        $('#select_val').val(val);
+        $('#pdf_edit_url').val(val);
     });
 }
