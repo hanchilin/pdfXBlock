@@ -17,7 +17,7 @@ This XBlock provides an easy way to embed a PDF.
     # Move to the folder where you want to download the XBlock
     cd /edx/app/edxapp
     # Download the XBlock
-    sudo -u edxapp git clone https://github.com/MarCnu/pdfXBlock.git
+    sudo -u edxapp git clone https://github.com/hanchilin/pdfXBlock
     # Install the XBlock
     sudo -u edxapp /edx/bin/pip.edxapp install pdfXBlock/
     # Upgrade the XBlock if it is already installed, using --upgrade
